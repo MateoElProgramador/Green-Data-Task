@@ -1,16 +1,25 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const path = require('path');
+const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
+// Allow Node access to built React project:
+app.use(express.static(path.resolve(__dirname, '../my-react-app/build')));
+
+// app.get('/', (req, res) => {
+//   res.send('Hello World!')
+// });
 
 app.get('/hello-react', (req, res) => {
   res.json({ message: "Node says hiya!"});
 });
 
-// listen to port 3000, and route if possible:
+// Any GET requests not handled above will return the React app:
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../my-react-app/build', 'index.html'));
+});
+
+// listen to port 3000:
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
 });
