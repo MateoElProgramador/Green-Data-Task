@@ -79,14 +79,15 @@ class LoginForm extends React.Component {
           className="block input-border"
         />
         
-        <input
-          name="rememberDevice"
-          type="checkbox"
-          id="remember-device-checkbox"
-          checked={this.state.rememberDevice}
-          onChange={this.handleInputChange} />
-
-        <label for="rememberDevice" id="remember-device-label">Remember this device</label>
+        <label id="remember-device-label">
+          <input
+            name="rememberDevice"
+            type="checkbox"
+            id="remember-device-checkbox"
+            checked={this.state.rememberDevice}
+            onChange={this.handleInputChange} />
+          Remember this device
+        </label>
 
         <input type="submit" value="Sign in" id="signin-submit" className="block input-border" />
 
