@@ -1,8 +1,7 @@
 import React from "react";
-import logo from './logo.svg';
-import './App.sass';
+import './Login.sass';
 
-function App() {
+function Login() {
 
   // Gets the state of this component (data), and a function to change the state (setData):
   const [data, setData] = React.useState(null);
@@ -97,4 +96,4 @@ class LoginForm extends React.Component {
 
 }
 
-export default App;
+export default Login;
