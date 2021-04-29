@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './stylesheets/index.sass';
-import Login from './classes/Login';
+import Profile from './classes/profile';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <Profile />
   </React.StrictMode>,
   document.getElementById('root')
 );
