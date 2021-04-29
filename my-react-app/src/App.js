@@ -18,7 +18,7 @@ function App() {
   return (
     <main>
       <div className="login-container">
-        <img src="https://green.cdn.energy/branding/logo-r.svg" className="green-logo" alt="Green logo" />
+        <img src="https://green.cdn.energy/branding/logo-r.svg" id="green-logo" alt="Green logo" />
         <h2 className="login-header">Welcome to Green.</h2>
         <span className="login-subheader">Please enter your email below</span>
         <LoginForm></LoginForm>
@@ -82,6 +82,7 @@ class LoginForm extends React.Component {
         <input
           name="rememberDevice"
           type="checkbox"
+          id="remember-device-checkbox"
           checked={this.state.rememberDevice}
           onChange={this.handleInputChange} />
 
