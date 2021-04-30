@@ -2,17 +2,15 @@ import React from "react";
 import '../stylesheets/Login.sass';
 
 function Login() {
-
   // Gets the state of this component (data), and a function to change the state (setData):
-  const [data, setData] = React.useState(null);
+  // const [data, setData] = React.useState(null);
 
   // run a fetch side-effect independently of rendering, to get JSON from Node server:
-  React.useEffect(() => {
-    fetch("/hello-react")
-      .then((res) => res.json())    // get JSON from result
-      .then((data) => setData(data.message));   // save JSON as a state variable
-  }, []);
-
+  // React.useEffect(() => {
+  //   fetch("/hello-react")
+  //     .then((res) => res.json())    // get JSON from result
+  //     .then((data) => setData(data.message));   // save JSON as a state variable
+  // }, []);
 
   return (
     <main>
@@ -20,20 +18,10 @@ function Login() {
         <img src="https://green.cdn.energy/branding/logo-r.svg" id="green-logo" alt="Green logo" />
         <h2 className="login-header">Welcome to Green.</h2>
         <span className="login-subheader">Please enter your email below</span>
-        <LoginForm></LoginForm>
+        <LoginForm />
       </div>
     </main>
   );
-
-
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>{!data ? "Loading..." : data}</p>
-  //     </header>
-  //   </div>
-  // );
 }
 
 class LoginForm extends React.Component {
@@ -42,14 +30,15 @@ class LoginForm extends React.Component {
 
     this.state = {
       email: '',
-      rememberDevice: false
+      rememberDevice: false,
+      errorMessage: ''
     };
 
     // Bind handleInputChange to the class:
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
   }
-
 
   // Handles the change of either form input, changing the state accordingly:
   handleInputChange(event) {
@@ -62,13 +51,35 @@ class LoginForm extends React.Component {
     this.setState({
       [name]: value
     });
+  }
 
-    console.log("Changed input " + name + " to '" + value +"'");
+  // Packages form information into JSON to send to the Node server:
+  handleSubmit(event) {
+    event.preventDefault();   // stop default submit behaviour from occurring
+    
+    // package email and remember device into JSON
+    // send JSON to /login (POST)
+
+    // Send form data to Node via POST:
+    fetch("/login", {
+      method: "POST",
+      body: JSON.stringify({"email": this.state.email,
+                            "rememberDevice": this.state.rememberDevice}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => res.json())    // get JSON from result
+      .then((res) => {
+        res.validation ? window.location = '/profile' : this.setState({errorMessage: 'Incorrect email'});
+      });
+
   }
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
+        <span id="login-error-message">{this.state.errorMessage}</span>
         <label for="email" id="email-label">Email address</label>
         <input
           name="email"
@@ -88,7 +99,12 @@ class LoginForm extends React.Component {
           Remember this device
         </label>
 
-        <input type="submit" value="Sign in" id="signin-submit" className="block input-border" />
+        <input
+          type="submit"
+          value="Sign in"
+          id="signin-submit"
+          className="block input-border"
+        />
 
       </form>
     );

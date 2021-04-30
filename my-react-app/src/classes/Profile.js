@@ -1,7 +1,7 @@
 import React from "react";
-import '../stylesheets/Profile.sass';
+// import '../stylesheets/Profile.sass';
 
-function Login() {
+function Profile() {
 
   // Gets the state of this component (data), and a function to change the state (setData):
   const [data, setData] = React.useState(null);
@@ -19,8 +19,6 @@ function Login() {
       <div className="login-container">
         <img src="https://green.cdn.energy/branding/logo-r.svg" id="green-logo" alt="Green logo" />
         <h2 className="login-header">Welcome to Green.</h2>
-        <span className="login-subheader">Please enter your email below</span>
-        <LoginForm></LoginForm>
       </div>
     </main>
   );
@@ -36,64 +34,4 @@ function Login() {
   // );
 }
 
-class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: '',
-      rememberDevice: false
-    };
-
-    // Bind handleInputChange to the class:
-    this.handleInputChange = this.handleInputChange.bind(this);
-
-  }
-
-
-  // Handles the change of either form input, changing the state accordingly:
-  handleInputChange(event) {
-    const target = event.target;  // where event came from
-    // Get value of changed input (covers whether checkbox is checked):
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name    // name of changed input, required for setting state correctly
-
-    // set state of form object based on changed input:
-    this.setState({
-      [name]: value
-    });
-
-    console.log("Changed input " + name + " to '" + value +"'");
-  }
-
-  render() {
-    return (
-      <form>
-        <label for="email" id="email-label">Email address</label>
-        <input
-          name="email"
-          type="email"
-          onChange={this.handleInputChange}
-          id="email-textbox"
-          className="block input-border"
-        />
-        
-        <label id="remember-device-label">
-          <input
-            name="rememberDevice"
-            type="checkbox"
-            id="remember-device-checkbox"
-            checked={this.state.rememberDevice}
-            onChange={this.handleInputChange} />
-          Remember this device
-        </label>
-
-        <input type="submit" value="Sign in" id="signin-submit" className="block input-border" />
-
-      </form>
-    );
-  }
-
-}
-
-export default Login;
+export default Profile;
