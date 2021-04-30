@@ -71,6 +71,7 @@ class LoginForm extends React.Component {
     })
       .then((res) => res.json())    // get JSON from result
       .then((res) => {
+        // Redirect to profile, or show error message, depending on validation variable:
         res.validation ? window.location = '/profile' : this.setState({errorMessage: 'Incorrect email'});
       });
 
@@ -79,7 +80,6 @@ class LoginForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <span id="login-error-message">{this.state.errorMessage}</span>
         <label for="email" id="email-label">Email address</label>
         <input
           name="email"
@@ -88,16 +88,20 @@ class LoginForm extends React.Component {
           id="email-textbox"
           className="block input-border"
         />
+
+        <span id="login-error-message">{this.state.errorMessage}</span>
         
-        <label id="remember-device-label">
-          <input
-            name="rememberDevice"
-            type="checkbox"
-            id="remember-device-checkbox"
-            checked={this.state.rememberDevice}
-            onChange={this.handleInputChange} />
-          Remember this device
-        </label>
+        <div id="remember-device-container">
+          <label id="remember-device-label">
+            <input
+              name="rememberDevice"
+              type="checkbox"
+              id="remember-device-checkbox"
+              checked={this.state.rememberDevice}
+              onChange={this.handleInputChange} />
+            Remember this device
+          </label>
+        </div>
 
         <input
           type="submit"
