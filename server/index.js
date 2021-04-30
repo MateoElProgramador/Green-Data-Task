@@ -27,9 +27,9 @@ const port = 3000;
 // Allow Node access to built React project:
 app.use(express.static(path.resolve(__dirname, '../my-react-app/build')));
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// });
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+});
 
 app.get('/hello-react', (req, res) => {
   res.json({ message: "Node says hiya!"});
@@ -50,14 +50,14 @@ app.post('/login', (req, res) => {
 });
 
 // This route is only accessible when logged in
-app.get('/profile', (req, res) => {
-  res.json("You made it!");
-});
-
-// Any GET requests not handled above will return the React app:
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../my-react-app/build', 'index.html'));
+// app.get('/profile', (req, res) => {
+//   res.send("You made it!");
 // });
+
+// All GET requests return the React app, and React's own routing displays the correct components:
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../my-react-app/build', 'index.html'));
+});
 
 // listen to port 3000:
 app.listen(port, () => {

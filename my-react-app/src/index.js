@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Route, Link, BrowserRouter as Router} from 'react-router-dom';
+import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import './stylesheets/index.sass';
 import Login from './classes/Login';
 import Profile from './classes/Profile';
@@ -10,8 +10,10 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Route path='/' component={Login} />
-      <Route path='/profile' component={Profile} />
+      <Switch>
+        <Route exact path='/' component={Login} />
+        <Route path='/profile' component={Profile} />
+      </Switch>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
