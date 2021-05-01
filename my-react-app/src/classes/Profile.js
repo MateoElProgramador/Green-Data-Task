@@ -5,6 +5,7 @@ function Profile() {
 
   // Gets the state of this component (data), and a function to change the state (setData):
   const [data, setData] = React.useState(null);
+  console.log(data);
 
   // run a fetch side-effect independently of rendering, to get JSON from Node server:
   React.useEffect(() => {
@@ -18,7 +19,9 @@ function Profile() {
     <main>
       <div className="login-container">
         <img src="https://green.cdn.energy/branding/logo-r.svg" id="green-logo" alt="Green logo" />
-        <h2 className="login-header">Welcome to Green.</h2>
+        <h2 className="login-header">You made it.</h2>
+        <p>You are now on a page which can only be accessed by using the login form, as you just did.</p>
+        <a href="/" onClick={logout}>Log out</a>
       </div>
     </main>
   );
@@ -32,6 +35,22 @@ function Profile() {
   //     </header>
   //   </div>
   // );
+}
+
+// TODO: Not used yet
+function logout() {
+  // Send request to server to log out:
+  fetch("/logout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then((res) => res.json())    // get JSON from result
+    .then((res) => {
+      // Redirect to profile, or show error message, depending on validation variable:
+      res.validation ? window.location = '/profile' : this.setState({errorMessage: 'Incorrect email'});
+    });
 }
 
 export default Profile;

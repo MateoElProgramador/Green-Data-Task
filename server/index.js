@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-// Sessions for tracking permissions to profile page:
+// Sessions for tracking permission for profile page:
 const session = require('express-session');
 app.use(session({
   secret: 'verysecuresecret',
@@ -27,10 +27,6 @@ const port = 3000;
 // Allow Node access to built React project:
 app.use(express.static(path.resolve(__dirname, '../my-react-app/build')));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
-
 app.get('/hello-react', (req, res) => {
   res.json({ message: "Node says hiya!"});
 });
@@ -46,6 +42,10 @@ app.post('/login', (req, res) => {
     console.log("Incorrect email");
     res.json({validation: false});
   }
+
+});
+
+app.post('/logout', (req, res) => {
 
 });
 
