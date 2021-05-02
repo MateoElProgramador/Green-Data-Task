@@ -7,7 +7,7 @@ function Profile(props) {
       <div className="login-container">
         <img src="https://green.cdn.energy/branding/logo-r.svg" id="green-logo" alt="Green logo" />
         <h2 className="login-header">You made it.</h2>
-        <p>You are now on a page which can only be accessed by using the login form, as you just did.</p>
+        <p>Soon you will be able to see your profile and account details from here, but you'll have to wait until this developer is given another task!</p>
         <a href="#" onClick={props.logout}>Log out</a>
       </div>
     </main>

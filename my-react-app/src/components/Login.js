@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Login(props) {
+  // NOT USED: an experiment in sending requests to the server
   // Gets the state of this component (data), and a function to change the state (setData):
   // const [data, setData] = React.useState(null);
 
@@ -90,6 +91,7 @@ class LoginForm extends React.Component {
           onChange={this.handleInputChange}
           id="email-textbox"
           className="block input-border"
+          required
         />
 
         <span id="login-error-message">{this.state.errorMessage}</span>
