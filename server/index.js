@@ -1,25 +1,11 @@
 const express = require('express');
 const app = express();
 
-// Sessions for tracking permission for profile page:
-const session = require('express-session');
-app.use(session({
-  secret: 'verysecuresecret',
-  resave: false,
-  saveUninitialized: false
-}));
-
 // JSON wasn't being allowed to be send cross-origin (from React to Node), so this is required:
 // bodyParser = require('body-parser');
 // app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // app.use(require("body-parser").json());
-
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
 
 const path = require('path');
 const port = 3000;
@@ -31,6 +17,8 @@ app.get('/hello-react', (req, res) => {
   res.json({ message: "Node says hiya!"});
 });
 
+//  NOT USED: Receieves POST request and form data from React, and checks against my email
+//  (an experiment with passing data between React and Node)
 app.post('/login', (req, res) => {
   console.log("Route reached!");
   console.log(JSON.stringify(req.body));
@@ -44,15 +32,6 @@ app.post('/login', (req, res) => {
   }
 
 });
-
-app.post('/logout', (req, res) => {
-
-});
-
-// This route is only accessible when logged in
-// app.get('/profile', (req, res) => {
-//   res.send("You made it!");
-// });
 
 // All GET requests return the React app, and React's own routing displays the correct components:
 app.get('*', (req, res) => {

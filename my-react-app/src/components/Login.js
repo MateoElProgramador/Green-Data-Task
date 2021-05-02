@@ -54,7 +54,7 @@ class LoginForm extends React.Component {
     });
   }
 
-  // Packages form information into JSON to send to the Node server:
+  // NOT USED: Packages form information into JSON to send to the Node server:
   handleSubmit(event) {
     event.preventDefault();   // stop default submit behaviour from occurring
     
