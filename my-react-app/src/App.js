@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Switch, Redirect, Link, BrowserRouter as Router} from 'react-router-dom';
-import Login from './classes/Login';
-import Profile from './classes/Profile';
+import Login from './components/Login';
+import Profile from './components/Profile';
 
 
 class App extends React.Component {
