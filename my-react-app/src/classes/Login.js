@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
+import {Redirect} from 'react-router-dom'
 import '../stylesheets/Login.sass';
 
-function Login() {
+function Login(props) {
   // Gets the state of this component (data), and a function to change the state (setData):
   // const [data, setData] = React.useState(null);
 
@@ -11,6 +12,12 @@ function Login() {
   //     .then((res) => res.json())    // get JSON from result
   //     .then((data) => setData(data.message));   // save JSON as a state variable
   // }, []);
+  // alert("Foo: " + props.foo);
+  const auth = props.isAuth()
+  alert("Login: auth is " + auth);
+  if (auth) {
+    return <Redirect to='/profile' />
+  }
 
   return (
     <main>
@@ -18,7 +25,11 @@ function Login() {
         <img src="https://green.cdn.energy/branding/logo-r.svg" id="green-logo" alt="Green logo" />
         <h2 className="login-header">Welcome to Green.</h2>
         <span className="login-subheader">Please enter your email below</span>
-        <LoginForm />
+        <LoginForm
+          login={props.login}
+          logout={props.logout}
+          foo={props.foo}
+        />
       </div>
     </main>
   );
@@ -77,9 +88,15 @@ class LoginForm extends React.Component {
 
   }
 
-  render() {
+  // login() {
+  //   this.state.fakeAuth.authenticate();
+  //   alert(this.state.fakeAuth.isAuthenticated);
+  // }
+
+  render(props) {
     return (
-      <form onSubmit={this.handleSubmit}>
+      // <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.props.login}>
         <label for="email" id="email-label">Email address</label>
         <input
           name="email"
@@ -115,5 +132,18 @@ class LoginForm extends React.Component {
   }
 
 }
+
+// Dummy authentication:
+// const fakeAuth = {
+//   isAuthenticated: false,
+//   authenticate(cb) {
+//     this.isAuthenticated = true
+//     setTimeout(cb, 100) // fake async
+//   },
+//   signout(cb) {
+//     this.isAuthenticated = false
+//     setTimeout(cb, 100) // fake async
+//   }
+// }
 
 export default Login;
