@@ -40,20 +40,17 @@ class App extends React.Component {
 		return (
 			<Router>
 				<ul>
-					<li><Link to='/'>Login</Link></li>
+					<li><Link to='/'>Home</Link></li>
+					<li><Link to='/login'>Login</Link></li>
 					<li><Link to='/profile'>Profile</Link></li>
 				</ul>
 				<Switch>
-					{/* Seems a messy way of passing props to Routes, but I read it's the proper way */}
-					<Route exact path='/'
-						render={(props) =>
-							<Login {...props}
-								login={this.login}
-								isAuth={this.getAuth}
-								foo="bararara"/>
-						}
+					<RootRoute exact path='/' isAuth={this.getAuth} />
+					<LoginRoute path='/login'
+						isAuth={this.getAuth}
+						login={this.login}
 					/>
-					<PrivateProfileRoute path='/profile'
+					<ProfileRoute path='/profile'
 						isAuth={this.getAuth}
 						logout={this.logout}
 					/>
@@ -64,21 +61,39 @@ class App extends React.Component {
 
 }
 
-// Route which checks for authentication and renders/redirects accordingly:
-// Note: perhaps not correct for this component to be a member of the App class, but it makes
-// 			 accessing isAuthenticated quick and easy
-function PrivateProfileRoute ({ children, ...rest}) {
+
+function RootRoute ({ children, ...rest}) {
 	const auth = rest.isAuth();
-	alert("Profile: auth is " + auth);
-	// alert("auth: " + rest.isAuthenticated);
+	// alert("Root: auth is " + auth);
+		return auth
+			? <Redirect to='/profile' />
+			: <Redirect to='/login' />
+}
+
+function LoginRoute ({ children, ...rest}) {
+	const auth = rest.isAuth();
+	// alert("Login: auth is " + auth);
+	return (
+		<Route {...rest} render={(props) => {
+			return auth
+				? <Redirect to='/profile' />
+				: <Login {...props}
+						login={rest.login}
+					/>
+		}} />
+	)
+}
+
+function ProfileRoute ({ children, ...rest}) {
+	const auth = rest.isAuth();
+	// alert("Profile: auth is " + auth);
 	return (
 		<Route {...rest} render={(props) => {
 			return auth
 				? <Profile {...props}
-						logout={props.logout}
-						foo="barrrrr"
+						logout={rest.logout}
 					/>
-				: <Redirect to='/notloggedin' />
+				: <Redirect to='/login' />
 		}} />
 	)
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 // import '../stylesheets/Profile.sass';
 
 function Profile(props) {
