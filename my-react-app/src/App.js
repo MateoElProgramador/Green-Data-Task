@@ -2,12 +2,13 @@ import React from 'react';
 import {Route, Switch, Redirect, Link, BrowserRouter as Router} from 'react-router-dom';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import './stylesheets/app.sass';
 
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		alert("App created");
+		// alert("App created");			// useful for detecting when App component is recreated, hence losing state
 		this.state = {
 			isAuthenticated: false
 		}
@@ -21,13 +22,13 @@ class App extends React.Component {
 	login(e) {
 		e.preventDefault();
 		this.setState({ isAuthenticated: true });
-		alert("Logged in");
+		// alert("Logged in");
 	}
 
 	logout(e) {
 		e.preventDefault();
 		this.setState({ isAuthenticated: false });
-		alert("Logged out");
+		// alert("Logged out");
 	}
 
 	getAuth() {

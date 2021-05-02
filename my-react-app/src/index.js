@@ -4,7 +4,6 @@ import './stylesheets/index.sass';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// TODO: Routes don't work yet
 ReactDOM.render(
   <React.StrictMode>
     <App />

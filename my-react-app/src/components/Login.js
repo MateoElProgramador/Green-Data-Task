@@ -1,5 +1,4 @@
 import React from 'react';
-import '../stylesheets/Login.sass';
 
 function Login(props) {
   // Gets the state of this component (data), and a function to change the state (setData):
