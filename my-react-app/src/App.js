@@ -18,6 +18,8 @@ class App extends React.Component {
 		this.getAuth = this.getAuth.bind(this);
 	}
 
+	// Methods passed to the login/profile components respectively,
+	// which change the login status in the App component's state:
 
 	login(e) {
 		e.preventDefault();
@@ -31,6 +33,7 @@ class App extends React.Component {
 		// alert("Logged out");
 	}
 
+	// Called by child components of App, to check login status
 	getAuth() {
 		// alert("checking auth (" + this.state.isAuthenticated + ")");
 		return this.state.isAuthenticated;
@@ -63,6 +66,7 @@ class App extends React.Component {
 }
 
 
+// Route which redirects to login or profile pages, depending on login status:
 function RootRoute ({ children, ...rest}) {
 	const auth = rest.isAuth();
 	// alert("Root: auth is " + auth);
@@ -71,6 +75,7 @@ function RootRoute ({ children, ...rest}) {
 			: <Redirect to='/login' />
 }
 
+// Renders Login component, or redirects to Profile route:
 function LoginRoute ({ children, ...rest}) {
 	const auth = rest.isAuth();
 	// alert("Login: auth is " + auth);
@@ -85,6 +90,7 @@ function LoginRoute ({ children, ...rest}) {
 	)
 }
 
+// Renders Profile component, or redirects to Login route:
 function ProfileRoute ({ children, ...rest}) {
 	const auth = rest.isAuth();
 	// alert("Profile: auth is " + auth);

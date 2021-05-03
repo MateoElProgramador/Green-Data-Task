@@ -15,6 +15,7 @@ function Profile(props) {
 }
 
 
+// NOT USED: trying out sending requests to the server to log out
 // function logout() {
 //   // Send request to server to log out:
 //   fetch("/logout", {
